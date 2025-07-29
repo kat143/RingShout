@@ -1,6 +1,6 @@
 #include <FastLED.h>  // so that the FastLED library can be used
 
-#define NUM_LEDS 10  // number of LEDs in the strip
+#define NUM_LEDS 15  // number of LEDs in the strip
 #define LED_PIN 4   // pin connected to the strip's data pin (via a resistor)
 
 CRGB leds[NUM_LEDS];  // array representing the strip of LEDs, where leds[0] is the first LED on the strip
@@ -11,6 +11,7 @@ void setup() {
 }
 
 void loop() {
+  /*
   leds[0] = CRGB::Olive;
   leds[1] = CRGB::DarkOrange;
   leds[2] = CRGB::MediumSpringGreen;
@@ -23,7 +24,9 @@ void loop() {
   leds[9] = CRGB::Violet;
   FastLED.show();
   delay(1000);
+  */
 
+  /*
   for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB::Brown;
     FastLED.show();
@@ -35,7 +38,9 @@ void loop() {
     delay(250);
   }
   delay(500);
+  */
 
+  /*
   for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB::OrangeRed;
     FastLED.show();
@@ -45,4 +50,28 @@ void loop() {
     delay(100);
   }
   delay(500);
+  */
+
+  /**/
+  for (int led = 0; led < 20; led++) {
+    int turnOn = led % NUM_LEDS;
+    for (int i = 5; i >= 1; i--) {
+      leds[(turnOn + i) % NUM_LEDS] = CRGB::Yellow;
+      leds[((turnOn - i) + NUM_LEDS) % NUM_LEDS] = CRGB::Yellow;
+      FastLED.show();
+
+      delay(50);
+
+      leds[(turnOn + i) % NUM_LEDS] = CRGB::Black;
+      leds[((turnOn - i) + NUM_LEDS) % NUM_LEDS] = CRGB::Black;
+      FastLED.show();
+    }
+    leds[turnOn] = CRGB::Red;
+    FastLED.show();
+
+    delay(1000 - (50 * 5));
+
+    leds[turnOn] = CRGB::Black;
+    FastLED.show();
+  }
 }
